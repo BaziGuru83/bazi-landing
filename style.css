@@ -1,1 +1,28 @@
+document.getElementById("baziForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const data = {
+    day: form.day.value,
+    month: form.month.value,
+    year: form.year.value,
+    hour: form.hour.value || undefined,
+    gender: form.gender.value,
+    city: form.city.value,
+    questionArea: form.questionArea.value,
+    language: "ru"
+  };
+
+  try {
+    const res = await fetch("https://bazi-calculator-aidarabrayev.replit.app/full-bazi-chart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    const json = await res.json();
+    document.getElementById("result").textContent = JSON.stringify(json, null, 2);
+  } catch (err) {
+    document.getElementById("result").textContent = "Ошибка при вызове судьбы: " + err.message;
+  }
+});
 
