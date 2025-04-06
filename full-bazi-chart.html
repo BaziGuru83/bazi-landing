@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Карта БаЦзы</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #fefefb;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .output {
+      white-space: pre-wrap;
+      background: #f4f4f4;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Твоя карта БаЦзы:</h2>
+  <div id="result" class="output">Загрузка...</div>
+
+  <script>
+    const userData = JSON.parse(localStorage.getItem('baziUserData'));
+
+    fetch('https://bazi-calculator-aidarabrayev.replit.app/full-bazi-chart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        day: new Date(userData.birth).getDate().toString(),
+        month: (new Date(userData.birth).getMonth() + 1).toString(),
+        year: new Date(userData.birth).getFullYear().toString(),
+        hour: userData.hour || "",
+        gender: userData.gender,
+        city: userData.city,
+        questionArea: userData.area,
+        language: "ru",
+        positiveYears: userData.positiveYears,
+        negativeYears: userData.negativeYears,
+        openQ: userData.openQ
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+    })
+    .catch(err => {
+      document.getElementById('result').innerText = 'Ошибка загрузки карты: ' + err;
+    });
+  </script>
+</body>
+</html>
