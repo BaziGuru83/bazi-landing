@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Цифровой Анализ БаЦзы</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🔮 Цифровой анализ судьбы по БаЦзы</h1>
+    <form id="baziForm">
+      <label>День рождения:<input type="number" name="day" min="1" max="31" required></label>
+      <label>Месяц:<input type="number" name="month" min="1" max="12" required></label>
+      <label>Год:<input type="number" name="year" min="1900" max="2100" required></label>
+      <label>Час (0–23):<input type="number" name="hour" min="0" max="23"></label>
+      <label>Пол:
+        <select name="gender">
+          <option value="female">Женский</option>
+          <option value="male">Мужской</option>
+        </select>
+      </label>
+      <label>Город:<input type="text" name="city"></label>
+      <label>Сфера запроса:
+        <select name="questionArea">
+          <option value="purpose">Предназначение</option>
+          <option value="finance">Финансы</option>
+          <option value="relationships">Отношения</option>
+          <option value="health">Здоровье</option>
+        </select>
+      </label>
+      <button type="submit">🔍 Рассчитать судьбу</button>
+    </form>
+    <pre id="result">Здесь появится твой прогноз...</pre>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
 
